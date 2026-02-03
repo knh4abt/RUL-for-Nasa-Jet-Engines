@@ -25,6 +25,6 @@ This project predicts Remaining Useful Life (RUL) for jet engines using NASA C-M
 
 ## Running the Project
 
-```bash
+```powershell
 python main.py
 ```
