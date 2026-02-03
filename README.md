@@ -17,7 +17,6 @@ This `main` branch contains the **initial version** of the project with basic ML
 -  LSTM Neural Network
 -  Enhanced visualizations (dashboard + multi-engine plots)
 -  More models (Ridge, improved comparisons)
--  Pretty console output
 -  Full documentation
 
 ---
