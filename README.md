@@ -63,10 +63,10 @@ This avoids data leakage from direct RUL regression on sequential data.
 pip install -r requirements.txt
 ```
 
-Set dataset path in `main.py`:
+Set dataset path via environment variable or edit `config.py`:
 
-```python
-DATA_DIR = Path("/path/to/CMAPSSData")
+```bash
+export RUL_DATA_DIR="/path/to/CMAPSSData"
 ```
 
 The directory should contain `train_FD001.txt`, `test_FD001.txt`, and `RUL_FD001.txt`.
@@ -75,18 +75,19 @@ The directory should contain `train_FD001.txt`, `test_FD001.txt`, and `RUL_FD001
 
 ## Usage
 
-Run the full pipeline:
+Train and compare all models:
 
 ```bash
 python main.py
 ```
 
-This will:
-1. Load and preprocess data
-2. Engineer features
-3. Train and compare models
-4. Generate online RUL predictions
-5. Display comparison plots
+Run evaluation only:
+
+```bash
+python evaluate.py
+```
+
+All hyperparameters are in `config.py`.
 
 ---
 
@@ -94,13 +95,25 @@ This will:
 
 ```
 RUL-for-Nasa-Jet-Engines/
-├── main.py              # Full pipeline: data → features → train → evaluate
-├── requirements.txt     # Python dependencies
-├── README.md            # This file
-└── local_assets/        # Data files (not tracked)
-    ├── train_FD001.txt
-    ├── test_FD001.txt
-    └── RUL_FD001.txt
+├── config.py              # Paths, hyperparameters, random seed
+├── main.py                # Training entry point
+├── evaluate.py            # Standalone evaluation script
+├── data/
+│   ├── __init__.py
+│   └── dataset.py         # Data loading and feature engineering
+├── models/
+│   ├── __init__.py
+│   └── regressors.py      # Model definitions
+├── training/
+│   ├── __init__.py
+│   └── trainer.py         # Training loop and model comparison
+├── utils/
+│   ├── __init__.py
+│   ├── metrics.py         # RMSE, MAE evaluation
+│   └── visualization.py   # Plotting functions
+├── results/               # Saved outputs
+├── requirements.txt
+└── README.md
 ```
 
 ---
